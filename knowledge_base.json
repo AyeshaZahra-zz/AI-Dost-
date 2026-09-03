@@ -1,0 +1,22 @@
+﻿{
+  "services": [
+    {
+      "id": 1,
+      "name_urdu": "نادرا",
+      "name_english": "NADRA",
+      "description_urdu": "قومی ڈیٹا بیس اور رجسٹریشن اتھارٹی - شناخت کے دستاویزات جاری کرتا ہے",
+      "description_english": "National Database and Registration Authority - Issues ID cards",
+      "website": "https://www.nadra.gov.pk",
+      "phone": "+92-51-9242500"
+    },
+    {
+      "id": 2,
+      "name_urdu": "ہیلتھ",
+      "name_english": "Healthcare",
+      "description_urdu": "حکومتی صحت کی سہولیات",
+      "description_english": "Government healthcare facilities",
+      "website": "https://www.health.gov.pk",
+      "phone": "+92-51-9211234"
+    }
+  ]
+}
