@@ -1,445 +1,976 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Dost - Pakistan Services</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 700px;
-            height: 90vh;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .lang-btn {
-            padding: 8px 15px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .lang-btn.active {
-            background: white;
-            color: #1abc9c;
-        }
-        
-        .voice-btn {
-            padding: 8px 15px;
-            background: #ff6b6b;
-            color: white;
-@"
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Dost - Pakistan Services</title>
+    <title>AI Dost 🤖</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary: #6c4cff;
+            --primary-dark: #5135d9;
+            --bg: #f7f7fb;
+            --card: #ffffff;
+            --text: #1e1e2d;
+            --muted: #77778b;
+            --border: #e9e9f1;
+            --user: #6c4cff;
+            --assistant: #ffffff;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(108, 76, 255, 0.12), transparent 35%),
+                linear-gradient(135deg, #f8f7ff 0%, #f5f5fa 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .app {
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 700px;
-            height: 90vh;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
-            color: white;
-            padding: 20px;
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(18px);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .brand {
+            display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
+            padding: 4px 8px;
         }
-        
-        .header h1 {
-            font-size: 28px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .lang-btn {
-            padding: 8px 15px;
-            border: 2px solid white;
-            background: transparent;
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #7c5cff, #5b3ce6);
+            display: grid;
+            place-items: center;
             color: white;
-            border-radius: 20px;
-            cursor: pointer;
+            font-size: 23px;
+            box-shadow: 0 10px 25px rgba(108,76,255,.25);
+        }
+
+        .brand h1 {
+            font-size: 21px;
+            letter-spacing: -.4px;
+        }
+
+        .brand p {
+            color: var(--muted);
             font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s;
+            margin-top: 2px;
         }
-        
-        .lang-btn.active {
-            background: white;
-            color: #1abc9c;
-        }
-        
-        .voice-btn {
-            padding: 8px 15px;
-            background: #ff6b6b;
-            color: white;
+
+        .new-chat {
             border: none;
-            border-radius: 20px;
+            width: 100%;
+            padding: 13px 15px;
+            border-radius: 13px;
+            background: var(--primary);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
+            transition: .2s;
+            box-shadow: 0 8px 18px rgba(108,76,255,.2);
+        }
+
+        .new-chat:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .side-title {
+            color: #9999aa;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 8px;
+        }
+
+        .quick-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .quick-btn {
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 11px 12px;
+            border-radius: 11px;
+            text-align: left;
+            color: #555568;
+            cursor: pointer;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .quick-btn:hover {
+            background: #f1efff;
+            color: var(--primary);
+            border-color: #e7e1ff;
+        }
+
+        .side-bottom {
+            margin-top: auto;
+            padding: 14px;
+            border-radius: 14px;
+            background: #f7f5ff;
+            border: 1px solid #e9e3ff;
+            color: #66647a;
             font-size: 12px;
-            font-weight: bold;
-            transition: all 0.3s;
+            line-height: 1.55;
         }
-        
-        .voice-btn:hover {
-            background: #ff5252;
-            transform: scale(1.05);
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
         }
-        
-        .voice-btn.recording {
-            background: #ff3333;
-            animation: pulse 1s infinite;
+
+        .topbar {
+            height: 72px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,.68);
+            backdrop-filter: blur(18px);
         }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #686879;
+            font-size: 13px;
         }
-        
+
+        .online-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #35c759;
+            box-shadow: 0 0 0 4px rgba(53,199,89,.12);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 11px;
+            cursor: pointer;
+            font-size: 17px;
+            transition: .2s;
+        }
+
+        .icon-btn:hover {
+            border-color: #d8d0ff;
+            background: #f7f5ff;
+        }
+
+        /* CHAT */
         .chat-area {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
-            background: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 38px 20px 25px;
+            scroll-behavior: smooth;
         }
-        
-        .message {
-            padding: 12px 15px;
-            border-radius: 10px;
-            max-width: 85%;
-            word-wrap: break-word;
-            line-height: 1.5;
-            font-size: 14px;
-            animation: slideIn 0.3s ease;
+
+        .chat-container {
+            width: min(850px, 100%);
+            margin: auto;
         }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .user-message {
-            align-self: flex-end;
-            background: #1abc9c;
-            color: white;
-            border-bottom-right-radius: 0;
-        }
-        
-        .bot-message {
-            align-self: flex-start;
-            background: #e9ecef;
-            color: #333;
-            border-bottom-left-radius: 0;
-        }
-        
+
         .welcome {
             text-align: center;
-            color: #999;
-            padding: 20px;
-            font-size: 13px;
+            padding: 35px 15px 30px;
         }
-        
-        .urdu-text {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
-        }
-        
-        .input-area {
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            gap: 10px;
-            background: white;
-            flex-wrap: wrap;
-        }
-        
-        .input-area input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        .input-area input:focus {
-            outline: none;
-            border-color: #1abc9c;
-        }
-        
-        .input-area button {
-            padding: 12px 25px;
-            background: #1abc9c;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .input-area button:hover {
-            background: #16a085;
-        }
-        
-        .clear-btn {
-            background: #dc3545;
-        }
-        
-        .clear-btn:hover {
-            background: #c82333;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #1abc9c;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🇵🇰 AI Dost</h1>
-            <div class="controls">
-                <button class="lang-btn active" onclick="setLanguage('english')">English</button>
-                <button class="lang-btn" onclick="setLanguage('urdu')">اردو</button>
-                <button class="voice-btn" onclick="startVoice()">🎤 Speak</button>
-            </div>
-        </div>
-        
-        <div class="chat-area" id="chat">
-            <div class="welcome" id="welcome">
-                <strong>🎉 Welcome to AI Dost!</strong><br>
-                Ask about: NADRA, Healthcare, Education, Taxes, Pensions, BISP
-            </div>
-        </div>
-        
-        <div class="input-area">
-            <input type="text" id="question" placeholder="Type or click 🎤 to speak..." autocomplete="off">
-            <button onclick="askQuestion()">Send</button>
-            <button class="clear-btn" onclick="clearChat()">Clear</button>
-        </div>
-    </div>
 
-    <script>
-        let history = [];
-        let currentLanguage = "english";
-        let recognition;
-        
-        // Speech Recognition Setup
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (SpeechRecognition) {
-            recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            
-            recognition.onstart = () => {
-                document.querySelector('.voice-btn').classList.add('recording');
-            };
-            
-            recognition.onend = () => {
-                document.querySelector('.voice-btn').classList.remove('recording');
-            };
-            
-            recognition.onresult = (event) => {
-                let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    transcript += event.results[i][0].transcript;
-                }
-                document.getElementById('question').value = transcript;
-                askQuestion();
-            };
-            
-            recognition.onerror = (event) => {
-                console.error('Speech recognition error:', event.error);
-            };
+        .welcome-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #7d61ff, #5c3be1);
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 34px;
+            box-shadow: 0 16px 35px rgba(108,76,255,.25);
         }
-        
-        function startVoice() {
-            if (recognition) {
-                recognition.lang = currentLanguage === 'urdu' ? 'ur-PK' : 'en-US';
-                recognition.start();
-            } else {
-                alert('Speech Recognition not supported in this browser');
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 9px;
+            letter-spacing: -.7px;
+        }
+
+        .welcome p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 520px;
+            margin: auto;
+        }
+
+        .suggestions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 24px auto 10px;
+            max-width: 650px;
+        }
+
+        .suggestion {
+            background: rgba(255,255,255,.85);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .suggestion:hover {
+            border-color: #d9d0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40,30,80,.06);
+        }
+
+        .suggestion strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .suggestion span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            animation: fadeUp .25s ease;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .avatar {
+            flex: 0 0 38px;
+            width: 38px;
+            height: 38px;
+            border-radius: 13px;
+            display: grid;
+            place-items: center;
+            font-size: 16px;
+        }
+
+        .bot-avatar {
+            background: #eeeaff;
+            color: var(--primary);
+        }
+
+        .user-avatar {
+            background: #ded8ff;
+            color: #4f39bf;
+            order: 2;
+        }
+
+        .bubble {
+            max-width: min(680px, 78%);
+            padding: 13px 16px;
+            border-radius: 17px;
+            line-height: 1.6;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .bot-bubble {
+            background: var(--assistant);
+            border: 1px solid var(--border);
+            border-top-left-radius: 6px;
+            box-shadow: 0 5px 18px rgba(30,20,70,.04);
+        }
+
+        .user-bubble {
+            background: var(--user);
+            color: white;
+            border-top-right-radius: 6px;
+            box-shadow: 0 7px 18px rgba(108,76,255,.18);
+        }
+
+        .typing {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+            padding: 15px 17px;
+        }
+
+        .typing span {
+            width: 6px;
+            height: 6px;
+            background: #999;
+            border-radius: 50%;
+            animation: bounce 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) { animation-delay: .15s; }
+        .typing span:nth-child(3) { animation-delay: .3s; }
+
+        /* COMPOSER */
+        .composer-wrap {
+            padding: 14px 20px 20px;
+            background: linear-gradient(transparent, rgba(247,247,251,.95) 25%);
+        }
+
+        .composer {
+            width: min(850px, 100%);
+            margin: auto;
+            background: white;
+            border: 1px solid #dedee9;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(35,25,80,.09);
+            padding: 9px;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        textarea {
+            flex: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 10px 9px;
+            min-height: 42px;
+            max-height: 130px;
+            font: inherit;
+            font-size: 14px;
+            color: var(--text);
+            background: transparent;
+        }
+
+        textarea::placeholder {
+            color: #aaa9b7;
+        }
+
+        .composer-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            font-size: 17px;
+            transition: .2s;
+        }
+
+        .attach-btn {
+            background: #f4f3f8;
+            color: #666577;
+        }
+
+        .voice-btn {
+            background: #f1efff;
+            color: var(--primary);
+        }
+
+        .send-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .composer-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .composer-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 8px 1px;
+            color: #aaa9b5;
+            font-size: 10px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-name {
+            display: none;
+            margin: 7px 8px 2px;
+            padding: 7px 10px;
+            background: #f5f3ff;
+            color: var(--primary);
+            border-radius: 8px;
+            font-size: 11px;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                display: none;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .chat-area {
+                padding: 20px 12px;
+            }
+
+            .suggestions {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h2 {
+                font-size: 23px;
+            }
+
+            .bubble {
+                max-width: 84%;
+            }
+
+            .composer-wrap {
+                padding: 10px 10px 14px;
             }
         }
-        
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
+    
+    .speak-message-btn { margin-left: 8px; border: 0; background: transparent; cursor: pointer; font-size: 16px; padding: 2px 5px; }
+    .speak-message-btn:hover { transform: scale(1.08); }
+</style>
+</head>
+
+<body>
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">🤖</div>
+            <div>
+                <h1>AI Dost</h1>
+                <p>Pakistan Services Assistant</p>
+            </div>
+        </div>
+
+        <button class="new-chat" onclick="newChat()">＋ New Chat</button>
+
+        <div class="side-title">Quick Services</div>
+
+        <div class="quick-list">
+            <button class="quick-btn" onclick="useSuggestion('NADRA aur CNIC ke bare mein batao')">🪪 NADRA & CNIC</button>
+            <button class="quick-btn" onclick="useSuggestion('BISP ke liye eligibility kya hai?')">💰 BISP</button>
+            <button class="quick-btn" onclick="useSuggestion('Pakistan mein scholarships kaise find karun?')">🎓 Education & Scholarships</button>
+            <button class="quick-btn" onclick="useSuggestion('FBR aur tax registration ka process kya hai?')">📄 FBR & Taxes</button>
+            <button class="quick-btn" onclick="useSuggestion('Government healthcare services ke bare mein batao')">🏥 Healthcare</button>
+            <button class="quick-btn" onclick="useSuggestion('Pakistan mein pension ka process kya hai?')">👴 Pensions</button>
+        </div>
+
+        <div class="side-bottom">
+            <strong>💡 AI Dost</strong><br>
+            Ask your question in English, Urdu, Roman Urdu, or a mix. AI Dost will try to reply in the same style.
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="status">
+                <span class="online-dot"></span>
+                AI Dost is ready
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-btn" title="Clear chat" onclick="newChat()">🗑️</button>
+            </div>
+        </header>
+
+        <section class="chat-area" id="chatArea">
+            <div class="chat-container" id="chatContainer">
+
+                <div class="welcome" id="welcome">
+                    <div class="welcome-icon">🤖</div>
+                    <h2>How can I help you today?</h2>
+                    <p>
+                        Get simple guidance about Pakistan government services,
+                        documents, education, healthcare, taxes and more.
+                    </p>
+
+                    <div class="suggestions">
+                        <button class="suggestion" onclick="useSuggestion('NADRA kya hai aur CNIC banwane ka process kya hai?')">
+                            <strong>🪪 NADRA & CNIC</strong>
+                            <span>CNIC aur NADRA services</span>
+                        </button>
+
+                        <button class="suggestion" onclick="useSuggestion('BISP ke liye apply kaise karte hain?')">
+                            <strong>💰 BISP</strong>
+                            <span>Eligibility aur application</span>
+                        </button>
+
+                        <button class="suggestion" onclick="useSuggestion('Pakistan mein scholarships kaise mil sakti hain?')">
+                            <strong>🎓 Scholarships</strong>
+                            <span>Education & financial help</span>
+                        </button>
+
+                        <button class="suggestion" onclick="useSuggestion('FBR mein tax registration kaise hoti hai?')">
+                            <strong>📄 FBR & Taxes</strong>
+                            <span>Tax related guidance</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="composer-wrap">
+            <div class="composer">
+
+                <div class="file-name" id="fileName"></div>
+
+                <div class="input-row">
+                    <input type="file" id="fileInput" accept=".pdf,.txt,.doc,.docx">
+
+                    <button class="composer-btn attach-btn"
+                            title="Upload document"
+                            onclick="document.getElementById('fileInput').click()">📎</button>
+
+                    <textarea id="messageInput"
+                              rows="1"
+                              placeholder="Ask AI Dost anything..."
+                              onkeydown="handleKey(event)"
+                              oninput="autoResize(this)"></textarea>
+
+                    <button class="composer-btn voice-btn"
+                            id="voiceBtn"
+                            title="Voice input"
+                            onclick="startVoice()">🎙️</button>
+
+                    <button class="composer-btn send-btn"
+                            title="Send"
+                            onclick="sendMessage()">➤</button>
+                </div>
+
+                <div class="composer-footer">
+                    <span>AI Dost can make mistakes. Verify important government information.</span>
+                    <span>Enter ↵</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    const API_URL = "http://127.0.0.1:8000";
+
+    let history = [];
+    let selectedFile = null;
+    let currentAudio = null;
+
+    function stopSpeaking() {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+        }
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+    }
+
+    function cleanSpeechText(text) {
+        const temp = document.createElement("div");
+        temp.innerHTML = text;
+        let clean = temp.textContent || temp.innerText || text;
+
+        // Remove emojis and other pictographic symbols before sending text to TTS.
+        clean = clean.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, "");
+
+        // Remove leftover extra spaces/punctuation gaps.
+        clean = clean.replace(/\s{2,}/g, " ").trim();
+        return clean;
+    }
+
+    async function speakText(text, button = null) {
+        stopSpeaking();
+        if (!text) return;
+        if (button) button.textContent = "⏹️";
+        try {
+            const response = await fetch(`${API_URL}/tts`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: cleanSpeechText(text) })
             });
-            event.target.classList.add('active');
-        }
-        
-        async function askQuestion() {
-            const q = document.getElementById("question").value;
-            if (!q.trim()) return;
-            
-            history.push({role: "User", content: q});
-            
-            const chatDiv = document.getElementById("chat");
-            chatDiv.innerHTML += '<div class="message user-message">' + escapeHtml(q) + '</div>';
-            document.getElementById("question").value = "";
-            
-            const welcome = document.getElementById("welcome");
-            if (welcome) welcome.remove();
-            
-            chatDiv.innerHTML += '<div class="message bot-message"><div class="loading"></div> Thinking...</div>';
-            chatDiv.scrollTop = chatDiv.scrollHeight;
-            
-            try {
-                const response = await fetch("http://127.0.0.1:8000/ask", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        text: q, 
-                        language: currentLanguage,
-                        history: history
-                    })
-                });
-                
-                const data = await response.json();
-                const answer = data.response;
-                
-                history.push({role: "AI Dost", content: answer});
-                
-                chatDiv.removeChild(chatDiv.lastChild);
-                
-                const answerDiv = currentLanguage === 'urdu' ? 
-                    '<div class="message bot-message urdu-text">' + escapeHtml(answer) + '</div>' :
-                    '<div class="message bot-message">' + escapeHtml(answer) + '</div>';
-                chatDiv.innerHTML += answerDiv;
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-                
-                // TTS (Text-to-Speech)
-                if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(answer);
-                    utterance.lang = currentLanguage === 'urdu' ? 'ur-PK' : 'en-US';
-                    utterance.rate = 0.9;
-                    speechSynthesis.speak(utterance);
-                }
-                
-            } catch(e) {
-                chatDiv.removeChild(chatDiv.lastChild);
-                chatDiv.innerHTML += '<div class="message bot-message">Error: ' + e.message + '</div>';
+            const data = await response.json();
+            if (data.status === "success" && data.audio) {
+                currentAudio = new Audio("data:audio/wav;base64," + data.audio);
+                currentAudio.onended = () => { currentAudio = null; if (button) button.textContent = "🔊"; };
+                await currentAudio.play();
+                return;
             }
+        } catch (e) { console.error("TTS error:", e); }
+
+        const utterance = new SpeechSynthesisUtterance(cleanSpeechText(text));
+        utterance.lang = detectSpeechLanguage(text);
+        utterance.onend = () => { if (button) button.textContent = "🔊"; };
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function detectSpeechLanguage(text) {
+        if (/^[\s\W]*$/.test(text)) return "en-US";
+        if (/[\u0600-\u06FF]/.test(text)) return "ur-PK";
+        if (/\b(kya|hai|hain|ka|ke|ki|ko|mein|mujhe|aap|ap|yeh|woh|aur|se|par|kr|karo|chahiye|shukriya|acha|theek)\b/i.test(text)) return "ur-PK";
+        return "en-US";
+    }
+
+    const chatArea = document.getElementById("chatArea");
+    const chatContainer = document.getElementById("chatContainer");
+    const welcome = document.getElementById("welcome");
+    const input = document.getElementById("messageInput");
+    const fileInput = document.getElementById("fileInput");
+    const fileName = document.getElementById("fileName");
+
+    function autoResize(el) {
+        el.style.height = "auto";
+        el.style.height = Math.min(el.scrollHeight, 130) + "px";
+    }
+
+    function handleKey(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
         }
-        
-        function clearChat() {
-            history = [];
-            document.getElementById("chat").innerHTML = '<div class="welcome" id="welcome"><strong>🎉 Welcome to AI Dost!</strong><br>Ask about: NADRA, Healthcare, Education, Taxes, Pensions, BISP</div>';
+    }
+
+    function useSuggestion(text) {
+        input.value = text;
+        autoResize(input);
+        input.focus();
+    }
+
+    function newChat() {
+        history = [];
+        selectedFile = null;
+        fileInput.value = "";
+        fileName.style.display = "none";
+
+        chatContainer.innerHTML = "";
+        chatContainer.appendChild(createWelcome());
+
+        input.value = "";
+        input.style.height = "42px";
+        input.focus();
+    }
+
+    function createWelcome() {
+        const div = document.createElement("div");
+        div.className = "welcome";
+        div.id = "welcome";
+
+        div.innerHTML = `
+            <div class="welcome-icon">🤖</div>
+            <h2>How can I help you today?</h2>
+            <p>
+                Get simple guidance about Pakistan government services,
+                documents, education, healthcare, taxes and more.
+            </p>
+
+            <div class="suggestions">
+                <button class="suggestion" onclick="useSuggestion('NADRA kya hai aur CNIC banwane ka process kya hai?')">
+                    <strong>🪪 NADRA & CNIC</strong>
+                    <span>CNIC aur NADRA services</span>
+                </button>
+                <button class="suggestion" onclick="useSuggestion('BISP ke liye apply kaise karte hain?')">
+                    <strong>💰 BISP</strong>
+                    <span>Eligibility aur application</span>
+                </button>
+                <button class="suggestion" onclick="useSuggestion('Pakistan mein scholarships kaise mil sakti hain?')">
+                    <strong>🎓 Scholarships</strong>
+                    <span>Education & financial help</span>
+                </button>
+                <button class="suggestion" onclick="useSuggestion('FBR mein tax registration kaise hoti hai?')">
+                    <strong>📄 FBR & Taxes</strong>
+                    <span>Tax related guidance</span>
+                </button>
+            </div>
+        `;
+
+        return div;
+    }
+
+    function addMessage(text, type) {
+        if (welcome) welcome.remove();
+
+        const row = document.createElement("div");
+        row.className = `message ${type}`;
+
+        const avatar = document.createElement("div");
+        avatar.className = `avatar ${type === "user" ? "user-avatar" : "bot-avatar"}`;
+        avatar.textContent = type === "user" ? "👤" : "🤖";
+
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${type === "user" ? "user-bubble" : "bot-bubble"}`;
+
+        if (type === "bot") {
+            bubble.innerHTML = formatAnswer(text);
+            const speakBtn = document.createElement("button");
+            speakBtn.className = "speak-message-btn";
+            speakBtn.type = "button";
+            speakBtn.textContent = "🔊";
+            speakBtn.title = "Speak / stop";
+            speakBtn.onclick = () => {
+                if (currentAudio || window.speechSynthesis.speaking) {
+                    stopSpeaking();
+                    speakBtn.textContent = "🔊";
+                } else {
+                    speakText(text, speakBtn);
+                }
+            };
+            bubble.appendChild(speakBtn);
+        } else {
+            bubble.textContent = text;
         }
-        
-        function escapeHtml(text) {
-            const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
-            return text.replace(/[&<>"']/g, m => map[m]);
+
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+        chatContainer.appendChild(row);
+
+        scrollToBottom();
+        return row;
+    }
+
+    function formatAnswer(text) {
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br>");
+    }
+
+    function showTyping() {
+        const row = document.createElement("div");
+        row.className = "message bot";
+        row.id = "typing";
+
+        row.innerHTML = `
+            <div class="avatar bot-avatar">🤖</div>
+            <div class="bubble bot-bubble typing">
+                <span></span><span></span><span></span>
+            </div>
+        `;
+
+        chatContainer.appendChild(row);
+        scrollToBottom();
+    }
+
+    function removeTyping() {
+        const typing = document.getElementById("typing");
+        if (typing) typing.remove();
+    }
+
+    function scrollToBottom() {
+        setTimeout(() => {
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }, 50);
+    }
+
+    async function sendMessage() {
+        stopSpeaking();
+        const text = input.value.trim();
+
+        if (!text && !selectedFile) return;
+
+        if (selectedFile) {
+            await uploadDocument(text || "Explain this document");
+            return;
         }
-        
-        document.getElementById("question").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") askQuestion();
+
+        addMessage(text, "user");
+
+        history.push({
+            role: "user",
+            content: text
         });
-    </script>
+
+        input.value = "";
+        input.style.height = "42px";
+
+        showTyping();
+
+        try {
+            const response = await fetch(`${API_URL}/ask`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: text,
+                    language: "auto",
+                    history: history.slice(-6)
+                })
+            });
+
+            const data = await response.json();
+            removeTyping();
+
+            const answer = data.response || "Sorry, I couldn't get a response.";
+
+            addMessage(answer, "bot");
+
+            history.push({
+                role: "assistant",
+                content: answer
+            });
+
+            const lastBot = chatContainer.querySelector(".message.bot:last-of-type .speak-message-btn");
+            speakText(answer, lastBot);
+
+        } catch (error) {
+            removeTyping();
+            addMessage(
+                "Connection problem. Please make sure AI Dost backend is running on port 8000.",
+                "bot"
+            );
+            console.error(error);
+        }
+    }
+
+    fileInput.addEventListener("change", function() {
+        selectedFile = this.files[0] || null;
+
+        if (selectedFile) {
+            fileName.textContent = `📄 ${selectedFile.name}`;
+            fileName.style.display = "block";
+            input.placeholder = "Ask something about this document...";
+            input.focus();
+        }
+    });
+
+    async function uploadDocument(question) {
+        if (!selectedFile) return;
+
+        addMessage(`📄 ${selectedFile.name}\n${question}`, "user");
+        showTyping();
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        formData.append("question", question);
+
+        try {
+            const response = await fetch(`${API_URL}/explain-document`, {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            removeTyping();
+
+            addMessage(
+                data.response || "I couldn't explain this document.",
+                "bot"
+            );
+
+        } catch (error) {
+            removeTyping();
+            addMessage(
+                "I couldn't upload the document. Please make sure the backend is running.",
+                "bot"
+            );
+            console.error(error);
+        }
+
+        selectedFile = null;
+        fileInput.value = "";
+        fileName.style.display = "none";
+        input.placeholder = "Ask AI Dost anything...";
+        input.value = "";
+        input.style.height = "42px";
+    }
+
+    function startVoice() {
+        stopSpeaking();
+        const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (!SpeechRecognition) {
+            alert("Voice input is not supported in this browser. Try Chrome or Edge.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+
+        recognition.lang = navigator.language || "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        const button = document.getElementById("voiceBtn");
+        button.textContent = "🔴";
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            input.value = event.results[0][0].transcript;
+            autoResize(input);
+        };
+
+        recognition.onerror = function() {
+            alert("Voice input couldn't be started. Please try again.");
+        };
+
+        recognition.onend = function() {
+            button.textContent = "🎙️";
+        };
+    }
+</script>
+
 </body>
 </html>
